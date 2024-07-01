@@ -57,9 +57,7 @@ export interface SharedSlider extends Schema.Component {
     icon: 'address-book';
     description: '';
   };
-  attributes: {
-    files: Attribute.Media;
-  };
+  attributes: {};
 }
 
 declare module '@strapi/types' {
