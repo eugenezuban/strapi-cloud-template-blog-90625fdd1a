@@ -362,6 +362,42 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
+export interface ApiPageContentPageContent extends Schema.CollectionType {
+  collectionName: 'page_contents';
+  info: {
+    singularName: 'page-content';
+    pluralName: 'page-contents';
+    displayName: 'Page Content';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    description: Attribute.Text & Attribute.Required;
+    header: Attribute.String & Attribute.Required;
+    position: Attribute.Integer & Attribute.Unique;
+    contentfulContentType: Attribute.String & Attribute.Required;
+    href: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::page-content.page-content',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::page-content.page-content',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiSiteConfigurationSiteConfiguration
   extends Schema.CollectionType {
   collectionName: 'site_configurations';
@@ -831,6 +867,7 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
+      'api::page-content.page-content': ApiPageContentPageContent;
       'api::site-configuration.site-configuration': ApiSiteConfigurationSiteConfiguration;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
