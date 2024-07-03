@@ -31,10 +31,6 @@
     "contentfulContentType": {
       "type": "string",
       "required": true
-    },
-    "href": {
-      "type": "string",
-      "required": true
     }
   }
 }

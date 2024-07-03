@@ -379,7 +379,6 @@ export interface ApiPageContentPageContent extends Schema.CollectionType {
     header: Attribute.String & Attribute.Required;
     position: Attribute.Integer & Attribute.Unique;
     contentfulContentType: Attribute.String & Attribute.Required;
-    href: Attribute.String & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
