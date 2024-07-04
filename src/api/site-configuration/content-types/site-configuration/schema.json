@@ -4,7 +4,8 @@
   "info": {
     "singularName": "site-configuration",
     "pluralName": "site-configurations",
-    "displayName": "Site Configuration"
+    "displayName": "Site Configuration",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -12,13 +13,16 @@
   "pluginOptions": {},
   "attributes": {
     "appStoreURL": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "shareUsURL": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "supportFormURL": {
-      "type": "string"
+      "type": "string",
+      "required": true
     }
   }
 }

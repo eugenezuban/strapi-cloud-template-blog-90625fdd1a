@@ -362,74 +362,6 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiPageContentPageContent extends Schema.CollectionType {
-  collectionName: 'page_contents';
-  info: {
-    singularName: 'page-content';
-    pluralName: 'page-contents';
-    displayName: 'Page Content';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text & Attribute.Required;
-    header: Attribute.String & Attribute.Required;
-    position: Attribute.Integer & Attribute.Unique;
-    contentfulContentType: Attribute.String & Attribute.Required;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::page-content.page-content',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::page-content.page-content',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiSiteConfigurationSiteConfiguration
-  extends Schema.CollectionType {
-  collectionName: 'site_configurations';
-  info: {
-    singularName: 'site-configuration';
-    pluralName: 'site-configurations';
-    displayName: 'Site Configuration';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    appStoreURL: Attribute.String;
-    shareUsURL: Attribute.String;
-    supportFormURL: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::site-configuration.site-configuration',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::site-configuration.site-configuration',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -856,6 +788,149 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiPageContentPageContent extends Schema.CollectionType {
+  collectionName: 'page_contents';
+  info: {
+    singularName: 'page-content';
+    pluralName: 'page-contents';
+    displayName: 'Page Content';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    metaTitle: Attribute.String & Attribute.Required;
+    metaDescription: Attribute.Text & Attribute.Required;
+    header: Attribute.String & Attribute.Required;
+    position: Attribute.Integer & Attribute.Unique;
+    contentfulContentType: Attribute.String;
+    href: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::page-content.page-content',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::page-content.page-content',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSiteConfigurationSiteConfiguration
+  extends Schema.CollectionType {
+  collectionName: 'site_configurations';
+  info: {
+    singularName: 'site-configuration';
+    pluralName: 'site-configurations';
+    displayName: 'Site Configuration';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    appStoreURL: Attribute.String & Attribute.Required;
+    shareUsURL: Attribute.String & Attribute.Required;
+    supportFormURL: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::site-configuration.site-configuration',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::site-configuration.site-configuration',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTutorialItemTutorialItem extends Schema.CollectionType {
+  collectionName: 'tutorial_items';
+  info: {
+    singularName: 'tutorial-item';
+    pluralName: 'tutorial-items';
+    displayName: 'Tutorial Item';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    position: Attribute.Integer & Attribute.Required & Attribute.Unique;
+    href: Attribute.Relation<
+      'api::tutorial-item.tutorial-item',
+      'oneToOne',
+      'api::tutorial-item-data.tutorial-item-data'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tutorial-item.tutorial-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tutorial-item.tutorial-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTutorialItemDataTutorialItemData
+  extends Schema.CollectionType {
+  collectionName: 'tutorial_items_data';
+  info: {
+    singularName: 'tutorial-item-data';
+    pluralName: 'tutorial-items-data';
+    displayName: 'Tutorial Item Data';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    header: Attribute.String & Attribute.Required;
+    mainImage: Attribute.Media;
+    href: Attribute.String & Attribute.Required & Attribute.Unique;
+    metaTitle: Attribute.String & Attribute.Required;
+    metaDescription: Attribute.Text & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tutorial-item-data.tutorial-item-data',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tutorial-item-data.tutorial-item-data',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -866,8 +941,6 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::page-content.page-content': ApiPageContentPageContent;
-      'api::site-configuration.site-configuration': ApiSiteConfigurationSiteConfiguration;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
@@ -876,6 +949,10 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::page-content.page-content': ApiPageContentPageContent;
+      'api::site-configuration.site-configuration': ApiSiteConfigurationSiteConfiguration;
+      'api::tutorial-item.tutorial-item': ApiTutorialItemTutorialItem;
+      'api::tutorial-item-data.tutorial-item-data': ApiTutorialItemDataTutorialItemData;
     }
   }
 }

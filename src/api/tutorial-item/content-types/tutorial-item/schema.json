@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tutorial_items",
+  "info": {
+    "singularName": "tutorial-item",
+    "pluralName": "tutorial-items",
+    "displayName": "Tutorial Item",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "position": {
+      "type": "integer",
+      "required": true,
+      "unique": true
+    },
+    "href": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::tutorial-item-data.tutorial-item-data"
+    }
+  }
+}

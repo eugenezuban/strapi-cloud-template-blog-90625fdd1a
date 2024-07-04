@@ -12,11 +12,11 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "metaTitle": {
       "type": "string",
       "required": true
     },
-    "description": {
+    "metaDescription": {
       "type": "text",
       "required": true
     },
@@ -30,7 +30,10 @@
     },
     "contentfulContentType": {
       "type": "string",
-      "required": true
+      "required": false
+    },
+    "href": {
+      "type": "string"
     }
   }
 }
