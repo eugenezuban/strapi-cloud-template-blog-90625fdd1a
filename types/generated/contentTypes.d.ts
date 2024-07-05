@@ -913,6 +913,10 @@ export interface ApiTutorialItemDataTutorialItemData
     href: Attribute.String & Attribute.Required & Attribute.Unique;
     metaTitle: Attribute.String & Attribute.Required;
     metaDescription: Attribute.Text & Attribute.Required;
+    contentBlocks: Attribute.Component<
+      'tutorial.tutorial-content-blocks',
+      true
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

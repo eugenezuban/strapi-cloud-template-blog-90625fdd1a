@@ -1,0 +1,17 @@
+{
+  "collectionName": "components_tutorial_tutorial_content_blocks",
+  "info": {
+    "displayName": "TutorialContentBlocks",
+    "icon": "database",
+    "description": ""
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    },
+    "content": {
+      "type": "blocks"
+    }
+  }
+}

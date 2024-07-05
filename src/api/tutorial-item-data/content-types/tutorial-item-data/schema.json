@@ -36,6 +36,11 @@
     "metaDescription": {
       "type": "text",
       "required": true
+    },
+    "contentBlocks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "tutorial.tutorial-content-blocks"
     }
   }
 }
