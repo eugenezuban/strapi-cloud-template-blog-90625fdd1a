@@ -806,6 +806,7 @@ export interface ApiPageContentPageContent extends Schema.CollectionType {
     position: Attribute.Integer & Attribute.Unique;
     contentfulContentType: Attribute.String;
     href: Attribute.String;
+    icon: Attribute.Media & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
