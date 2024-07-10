@@ -77,3 +77,12 @@
 ![info-component](https://github.com/eugenezuban/strapi-cloud-template-blog-90625fdd1a/assets/106373921/732d2334-cb57-437a-8d64-f865d804a5a8)
 - Bulleted list: 
 ![bulleted_list](https://github.com/eugenezuban/strapi-cloud-template-blog-90625fdd1a/assets/106373921/68bbf341-9097-4fef-90bb-0fee2acbc254)
+
+## Важлива примітка
+
+При копіюванні та вставці контенту, наприклад, цілого нумерованого списку (Numbered list), дотримуйтесь наступного порядку дій:
+
+1. У полі content (що знаходиться в contentBlocks) спочатку виберіть відповідний тип контенту (наприклад, Numbered list).
+2. Тільки після цього вставляйте скопійований контент.
+
+Це забезпечить правильне форматування та відображення вашого контенту в Strapi.
