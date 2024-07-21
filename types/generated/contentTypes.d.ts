@@ -910,7 +910,6 @@ export interface ApiTutorialItemDataTutorialItemData
   };
   attributes: {
     header: Attribute.String & Attribute.Required;
-    mainImage: Attribute.Media;
     href: Attribute.String & Attribute.Required & Attribute.Unique;
     metaTitle: Attribute.String & Attribute.Required;
     metaDescription: Attribute.Text & Attribute.Required;
@@ -918,6 +917,7 @@ export interface ApiTutorialItemDataTutorialItemData
       'tutorial.tutorial-content-blocks',
       true
     >;
+    youTubeUrl: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
