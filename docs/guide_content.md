@@ -49,7 +49,7 @@
 | Поле | Опис |
 |------|------|
 | header | Заголовок на сторінці |
-| mainImage | Головне (перше) зображення на сторінці |
+| youTubeUrl | Посилання на ютуб відео вибраного туторіала |
 | href | Шлях у браузері (можна змінювати) |
 | metaTitle | Назва сторінки у браузері |
 | metaDescription | Опис сторінки у браузері |
@@ -58,7 +58,7 @@
 - **title** (заголовок блоку)
 - **content** (список, зображення текст, інфо блок і так далі)
 
-![Tutorial_item_data](https://github.com/eugenezuban/strapi-cloud-template-blog-90625fdd1a/assets/106373921/1a192792-ed0f-475a-b39f-27cf0e3ff2f9)
+![Tutorial_item_data](https://github.com/user-attachments/assets/b6872cee-2516-48a9-b917-c4f6979ebaa7)
 
 #### Content Blocks:
 ![Content_blocks](https://github.com/eugenezuban/strapi-cloud-template-blog-90625fdd1a/assets/106373921/9a707cb7-70d9-4340-9c18-8fc9be9c16ed)
