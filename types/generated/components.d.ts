@@ -1,10 +1,10 @@
 import type { Schema, Attribute } from '@strapi/strapi';
 
-export interface TutorialTutorialContentBlocks extends Schema.Component {
+export interface BlogTutorialContentBlocks extends Schema.Component {
   collectionName: 'components_tutorial_tutorial_content_blocks';
   info: {
-    displayName: 'TutorialContentBlocks';
-    icon: 'database';
+    displayName: 'Blog Content Block';
+    icon: 'file';
     description: '';
   };
   attributes: {
@@ -16,7 +16,7 @@ export interface TutorialTutorialContentBlocks extends Schema.Component {
 declare module '@strapi/types' {
   export module Shared {
     export interface Components {
-      'tutorial.tutorial-content-blocks': TutorialTutorialContentBlocks;
+      'blog.tutorial-content-blocks': BlogTutorialContentBlocks;
     }
   }
 }

@@ -788,6 +788,118 @@ export interface PluginI18NLocale extends Schema.CollectionType {
   };
 }
 
+export interface ApiBlogCategoryBlogCategory extends Schema.CollectionType {
+  collectionName: 'blog_categories';
+  info: {
+    singularName: 'blog-category';
+    pluralName: 'blog-categories';
+    displayName: 'Blog Category';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-category.blog-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-category.blog-category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogPostBlogPost extends Schema.CollectionType {
+  collectionName: 'blog_posts';
+  info: {
+    singularName: 'blog-post';
+    pluralName: 'blog-posts';
+    displayName: 'Blog Post';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    mainImage: Attribute.Media & Attribute.Required;
+    metaTitle: Attribute.String & Attribute.Required;
+    metaDescription: Attribute.Text & Attribute.Required;
+    href: Attribute.String & Attribute.Required;
+    contentBlocks: Attribute.Component<'blog.tutorial-content-blocks', true>;
+    youtubeUrl: Attribute.String;
+    category: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'oneToOne',
+      'api::blog-category.blog-category'
+    >;
+    amountViews: Attribute.Integer &
+      Attribute.Required &
+      Attribute.DefaultTo<0>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-post.blog-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiNavigationItemNavigationItem extends Schema.CollectionType {
+  collectionName: 'navigation_items';
+  info: {
+    singularName: 'navigation-item';
+    pluralName: 'navigation-items';
+    displayName: 'Navigation Item';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    label: Attribute.String & Attribute.Required & Attribute.Unique;
+    icon: Attribute.Media & Attribute.Required;
+    page_content: Attribute.Relation<
+      'api::navigation-item.navigation-item',
+      'oneToOne',
+      'api::page-content.page-content'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::navigation-item.navigation-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::navigation-item.navigation-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiPageContentPageContent extends Schema.CollectionType {
   collectionName: 'page_contents';
   info: {
@@ -803,10 +915,9 @@ export interface ApiPageContentPageContent extends Schema.CollectionType {
     metaTitle: Attribute.String & Attribute.Required;
     metaDescription: Attribute.Text & Attribute.Required;
     header: Attribute.String & Attribute.Required;
-    position: Attribute.Integer & Attribute.Unique;
     contentfulContentType: Attribute.String;
     href: Attribute.String;
-    icon: Attribute.Media & Attribute.Required;
+    position: Attribute.Integer;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -859,83 +970,6 @@ export interface ApiSiteConfigurationSiteConfiguration
   };
 }
 
-export interface ApiTutorialItemTutorialItem extends Schema.CollectionType {
-  collectionName: 'tutorial_items';
-  info: {
-    singularName: 'tutorial-item';
-    pluralName: 'tutorial-items';
-    displayName: 'Tutorial Item';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    title: Attribute.String & Attribute.Required;
-    position: Attribute.Integer & Attribute.Required & Attribute.Unique;
-    href: Attribute.Relation<
-      'api::tutorial-item.tutorial-item',
-      'oneToOne',
-      'api::tutorial-item-data.tutorial-item-data'
-    >;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::tutorial-item.tutorial-item',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::tutorial-item.tutorial-item',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
-export interface ApiTutorialItemDataTutorialItemData
-  extends Schema.CollectionType {
-  collectionName: 'tutorial_items_data';
-  info: {
-    singularName: 'tutorial-item-data';
-    pluralName: 'tutorial-items-data';
-    displayName: 'Tutorial Item Data';
-    description: '';
-  };
-  options: {
-    draftAndPublish: true;
-  };
-  attributes: {
-    header: Attribute.String & Attribute.Required;
-    href: Attribute.String & Attribute.Required & Attribute.Unique;
-    metaTitle: Attribute.String & Attribute.Required;
-    metaDescription: Attribute.Text & Attribute.Required;
-    contentBlocks: Attribute.Component<
-      'tutorial.tutorial-content-blocks',
-      true
-    >;
-    youTubeUrl: Attribute.String;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::tutorial-item-data.tutorial-item-data',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::tutorial-item-data.tutorial-item-data',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 declare module '@strapi/types' {
   export module Shared {
     export interface ContentTypes {
@@ -954,10 +988,11 @@ declare module '@strapi/types' {
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
       'plugin::i18n.locale': PluginI18NLocale;
+      'api::blog-category.blog-category': ApiBlogCategoryBlogCategory;
+      'api::blog-post.blog-post': ApiBlogPostBlogPost;
+      'api::navigation-item.navigation-item': ApiNavigationItemNavigationItem;
       'api::page-content.page-content': ApiPageContentPageContent;
       'api::site-configuration.site-configuration': ApiSiteConfigurationSiteConfiguration;
-      'api::tutorial-item.tutorial-item': ApiTutorialItemTutorialItem;
-      'api::tutorial-item-data.tutorial-item-data': ApiTutorialItemDataTutorialItemData;
     }
   }
 }

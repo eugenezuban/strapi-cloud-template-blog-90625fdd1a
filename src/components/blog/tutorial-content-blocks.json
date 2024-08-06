@@ -1,8 +1,8 @@
 {
   "collectionName": "components_tutorial_tutorial_content_blocks",
   "info": {
-    "displayName": "TutorialContentBlocks",
-    "icon": "database",
+    "displayName": "Blog Content Block",
+    "icon": "file",
     "description": ""
   },
   "options": {},

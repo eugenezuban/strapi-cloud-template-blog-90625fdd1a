@@ -24,10 +24,6 @@
       "type": "string",
       "required": true
     },
-    "position": {
-      "type": "integer",
-      "unique": true
-    },
     "contentfulContentType": {
       "type": "string",
       "required": false
@@ -35,13 +31,8 @@
     "href": {
       "type": "string"
     },
-    "icon": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
-      "allowedTypes": [
-        "images"
-      ]
+    "position": {
+      "type": "integer"
     }
   }
 }
