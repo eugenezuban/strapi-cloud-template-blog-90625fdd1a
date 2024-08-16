@@ -1,0 +1,19 @@
+{
+  "collectionName": "components_seo_seo_blocks",
+  "info": {
+    "displayName": "Seo Block",
+    "icon": "earth"
+  },
+  "options": {},
+  "attributes": {
+    "metaTitle": {
+      "type": "string",
+      "required": true
+    },
+    "metaDescription": {
+      "type": "text",
+      "required": true,
+      "unique": false
+    }
+  }
+}

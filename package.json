@@ -14,10 +14,10 @@
     "react-router-dom": "5.3.4",
     "styled-components": "5.3.3"
   },
-  "name": "my-app-name",
+  "name": "brush-website-strapi",
   "private": true,
   "version": "0.1.0",
-  "description": "A Strapi application",
+  "description": "A Brush Website Strapi project",
   "scripts": {
     "dev": "strapi develop",
     "start": "strapi start",

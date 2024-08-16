@@ -1,0 +1,12 @@
+{
+  "collectionName": "components_legals_legals",
+  "info": {
+    "displayName": "Legals"
+  },
+  "options": {},
+  "attributes": {
+    "title": {
+      "type": "string"
+    }
+  }
+}

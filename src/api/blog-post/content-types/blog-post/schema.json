@@ -4,8 +4,7 @@
   "info": {
     "singularName": "blog-post",
     "pluralName": "blog-posts",
-    "displayName": "Blog Post",
-    "description": ""
+    "displayName": "Blog Posts"
   },
   "options": {
     "draftAndPublish": true
@@ -14,44 +13,40 @@
   "attributes": {
     "title": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": false
     },
     "mainImage": {
-      "type": "media",
-      "multiple": false,
-      "required": true,
       "allowedTypes": [
         "images"
-      ]
-    },
-    "metaTitle": {
-      "type": "string",
+      ],
+      "type": "media",
+      "multiple": false,
       "required": true
-    },
-    "metaDescription": {
-      "type": "text",
-      "required": true
-    },
-    "href": {
-      "type": "string",
-      "required": true
-    },
-    "contentBlocks": {
-      "type": "component",
-      "repeatable": true,
-      "component": "blog.tutorial-content-blocks"
     },
     "youtubeUrl": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "category": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::blog-category.blog-category"
     },
+    "seoBlock": {
+      "type": "component",
+      "repeatable": false,
+      "component": "seo.seo-block",
+      "required": true
+    },
     "amountViews": {
       "type": "integer",
-      "default": 0,
+      "required": true
+    },
+    "contentBlocks": {
+      "type": "component",
+      "repeatable": true,
+      "component": "blog.tutorial-content-blocks",
       "required": true
     }
   }

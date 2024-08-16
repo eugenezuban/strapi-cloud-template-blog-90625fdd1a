@@ -4,7 +4,7 @@
   "info": {
     "singularName": "navigation-item",
     "pluralName": "navigation-items",
-    "displayName": "Navigation Item",
+    "displayName": "Navigation Items",
     "description": ""
   },
   "options": {
@@ -14,8 +14,7 @@
   "attributes": {
     "label": {
       "type": "string",
-      "required": true,
-      "unique": true
+      "required": true
     },
     "icon": {
       "type": "media",
@@ -25,10 +24,14 @@
         "images"
       ]
     },
+    "position": {
+      "type": "integer",
+      "required": true
+    },
     "page_content": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::page-content.page-content"
+      "target": "api::page.page"
     }
   }
 }

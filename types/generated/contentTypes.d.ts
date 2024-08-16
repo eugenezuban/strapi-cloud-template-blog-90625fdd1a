@@ -793,13 +793,18 @@ export interface ApiBlogCategoryBlogCategory extends Schema.CollectionType {
   info: {
     singularName: 'blog-category';
     pluralName: 'blog-categories';
-    displayName: 'Blog Category';
+    displayName: 'Blog Categories';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    name: Attribute.String & Attribute.Required;
+    name: Attribute.String & Attribute.Required & Attribute.Unique;
+    blog_post_tabs: Attribute.Relation<
+      'api::blog-category.blog-category',
+      'manyToMany',
+      'api::blog-post-tab.blog-post-tab'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -823,8 +828,7 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
   info: {
     singularName: 'blog-post';
     pluralName: 'blog-posts';
-    displayName: 'Blog Post';
-    description: '';
+    displayName: 'Blog Posts';
   };
   options: {
     draftAndPublish: true;
@@ -832,19 +836,16 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
   attributes: {
     title: Attribute.String & Attribute.Required;
     mainImage: Attribute.Media & Attribute.Required;
-    metaTitle: Attribute.String & Attribute.Required;
-    metaDescription: Attribute.Text & Attribute.Required;
-    href: Attribute.String & Attribute.Required;
-    contentBlocks: Attribute.Component<'blog.tutorial-content-blocks', true>;
-    youtubeUrl: Attribute.String;
+    youtubeUrl: Attribute.String & Attribute.Required;
     category: Attribute.Relation<
       'api::blog-post.blog-post',
       'oneToOne',
       'api::blog-category.blog-category'
     >;
-    amountViews: Attribute.Integer &
-      Attribute.Required &
-      Attribute.DefaultTo<0>;
+    seoBlock: Attribute.Component<'seo.seo-block'> & Attribute.Required;
+    amountViews: Attribute.Integer & Attribute.Required;
+    contentBlocks: Attribute.Component<'blog.tutorial-content-blocks', true> &
+      Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -856,6 +857,76 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::blog-post.blog-post',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiBlogPostTabBlogPostTab extends Schema.CollectionType {
+  collectionName: 'blog_post_tabs';
+  info: {
+    singularName: 'blog-post-tab';
+    pluralName: 'blog-post-tabs';
+    displayName: 'Blog Post Tabs';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String & Attribute.Required;
+    position: Attribute.Integer & Attribute.Required;
+    href: Attribute.String & Attribute.Required;
+    blog_categories: Attribute.Relation<
+      'api::blog-post-tab.blog-post-tab',
+      'manyToMany',
+      'api::blog-category.blog-category'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::blog-post-tab.blog-post-tab',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::blog-post-tab.blog-post-tab',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLegalPageLegalPage extends Schema.CollectionType {
+  collectionName: 'legal_pages';
+  info: {
+    singularName: 'legal-page';
+    pluralName: 'legal-pages';
+    displayName: 'Legal Pages';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    href: Attribute.String & Attribute.Required;
+    seoBlock: Attribute.Component<'seo.seo-block'> & Attribute.Required;
+    content: Attribute.RichText & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::legal-page.legal-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::legal-page.legal-page',
       'oneToOne',
       'admin::user'
     > &
@@ -868,19 +939,20 @@ export interface ApiNavigationItemNavigationItem extends Schema.CollectionType {
   info: {
     singularName: 'navigation-item';
     pluralName: 'navigation-items';
-    displayName: 'Navigation Item';
+    displayName: 'Navigation Items';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    label: Attribute.String & Attribute.Required & Attribute.Unique;
+    label: Attribute.String & Attribute.Required;
     icon: Attribute.Media & Attribute.Required;
+    position: Attribute.Integer & Attribute.Required;
     page_content: Attribute.Relation<
       'api::navigation-item.navigation-item',
       'oneToOne',
-      'api::page-content.page-content'
+      'api::page.page'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -900,50 +972,37 @@ export interface ApiNavigationItemNavigationItem extends Schema.CollectionType {
   };
 }
 
-export interface ApiPageContentPageContent extends Schema.CollectionType {
-  collectionName: 'page_contents';
+export interface ApiPagePage extends Schema.CollectionType {
+  collectionName: 'pages';
   info: {
-    singularName: 'page-content';
-    pluralName: 'page-contents';
-    displayName: 'Page Content';
+    singularName: 'page';
+    pluralName: 'pages';
+    displayName: 'Pages';
     description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    metaTitle: Attribute.String & Attribute.Required;
-    metaDescription: Attribute.Text & Attribute.Required;
-    header: Attribute.String & Attribute.Required;
-    contentfulContentType: Attribute.String;
-    href: Attribute.String;
-    position: Attribute.Integer;
+    title: Attribute.String & Attribute.Required;
+    href: Attribute.String & Attribute.Required & Attribute.Unique;
+    seoBlock: Attribute.Component<'seo.seo-block'> & Attribute.Required;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'api::page-content.page-content',
-      'oneToOne',
-      'admin::user'
-    > &
+    createdBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
       Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'api::page-content.page-content',
-      'oneToOne',
-      'admin::user'
-    > &
+    updatedBy: Attribute.Relation<'api::page.page', 'oneToOne', 'admin::user'> &
       Attribute.Private;
   };
 }
 
-export interface ApiSiteConfigurationSiteConfiguration
-  extends Schema.CollectionType {
-  collectionName: 'site_configurations';
+export interface ApiSiteLinkSiteLink extends Schema.SingleType {
+  collectionName: 'site_links';
   info: {
-    singularName: 'site-configuration';
-    pluralName: 'site-configurations';
-    displayName: 'Site Configuration';
-    description: '';
+    singularName: 'site-link';
+    pluralName: 'site-links';
+    displayName: 'Site Link';
   };
   options: {
     draftAndPublish: true;
@@ -956,13 +1015,47 @@ export interface ApiSiteConfigurationSiteConfiguration
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::site-configuration.site-configuration',
+      'api::site-link.site-link',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::site-configuration.site-configuration',
+      'api::site-link.site-link',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiToolsPageToolsPage extends Schema.CollectionType {
+  collectionName: 'tool_pages';
+  info: {
+    singularName: 'tools-page';
+    pluralName: 'tool-pages';
+    displayName: 'Tool Pages';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    title: Attribute.String & Attribute.Required;
+    contentfulContentType: Attribute.String & Attribute.Required;
+    position: Attribute.Integer & Attribute.Required;
+    seoBlock: Attribute.Component<'seo.seo-block'> & Attribute.Required;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::tools-page.tools-page',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::tools-page.tools-page',
       'oneToOne',
       'admin::user'
     > &
@@ -990,9 +1083,12 @@ declare module '@strapi/types' {
       'plugin::i18n.locale': PluginI18NLocale;
       'api::blog-category.blog-category': ApiBlogCategoryBlogCategory;
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
+      'api::blog-post-tab.blog-post-tab': ApiBlogPostTabBlogPostTab;
+      'api::legal-page.legal-page': ApiLegalPageLegalPage;
       'api::navigation-item.navigation-item': ApiNavigationItemNavigationItem;
-      'api::page-content.page-content': ApiPageContentPageContent;
-      'api::site-configuration.site-configuration': ApiSiteConfigurationSiteConfiguration;
+      'api::page.page': ApiPagePage;
+      'api::site-link.site-link': ApiSiteLinkSiteLink;
+      'api::tools-page.tools-page': ApiToolsPageToolsPage;
     }
   }
 }

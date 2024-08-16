@@ -4,7 +4,7 @@
   "info": {
     "singularName": "blog-category",
     "pluralName": "blog-categories",
-    "displayName": "Blog Category"
+    "displayName": "Blog Categories"
   },
   "options": {
     "draftAndPublish": true
@@ -13,7 +13,14 @@
   "attributes": {
     "name": {
       "type": "string",
-      "required": true
+      "required": true,
+      "unique": true
+    },
+    "blog_post_tabs": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::blog-post-tab.blog-post-tab",
+      "mappedBy": "blog_categories"
     }
   }
 }
