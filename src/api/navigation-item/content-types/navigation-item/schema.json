@@ -28,7 +28,7 @@
       "type": "integer",
       "required": true
     },
-    "page_content": {
+    "pageContent": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "api::page.page"

@@ -949,7 +949,7 @@ export interface ApiNavigationItemNavigationItem extends Schema.CollectionType {
     label: Attribute.String & Attribute.Required;
     icon: Attribute.Media & Attribute.Required;
     position: Attribute.Integer & Attribute.Required;
-    page_content: Attribute.Relation<
+    pageContent: Attribute.Relation<
       'api::navigation-item.navigation-item',
       'oneToOne',
       'api::page.page'
