@@ -590,6 +590,53 @@ export interface PluginContentReleasesReleaseAction
   };
 }
 
+export interface PluginI18NLocale extends Schema.CollectionType {
+  collectionName: 'i18n_locale';
+  info: {
+    singularName: 'locale';
+    pluralName: 'locales';
+    collectionName: 'locales';
+    displayName: 'Locale';
+    description: '';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    'content-manager': {
+      visible: false;
+    };
+    'content-type-builder': {
+      visible: false;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetMinMax<
+        {
+          min: 1;
+          max: 50;
+        },
+        number
+      >;
+    code: Attribute.String & Attribute.Unique;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'plugin::i18n.locale',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface PluginUsersPermissionsPermission
   extends Schema.CollectionType {
   collectionName: 'up_permissions';
@@ -741,53 +788,6 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
   };
 }
 
-export interface PluginI18NLocale extends Schema.CollectionType {
-  collectionName: 'i18n_locale';
-  info: {
-    singularName: 'locale';
-    pluralName: 'locales';
-    collectionName: 'locales';
-    displayName: 'Locale';
-    description: '';
-  };
-  options: {
-    draftAndPublish: false;
-  };
-  pluginOptions: {
-    'content-manager': {
-      visible: false;
-    };
-    'content-type-builder': {
-      visible: false;
-    };
-  };
-  attributes: {
-    name: Attribute.String &
-      Attribute.SetMinMax<
-        {
-          min: 1;
-          max: 50;
-        },
-        number
-      >;
-    code: Attribute.String & Attribute.Unique;
-    createdAt: Attribute.DateTime;
-    updatedAt: Attribute.DateTime;
-    createdBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-    updatedBy: Attribute.Relation<
-      'plugin::i18n.locale',
-      'oneToOne',
-      'admin::user'
-    > &
-      Attribute.Private;
-  };
-}
-
 export interface ApiBlogCategoryBlogCategory extends Schema.CollectionType {
   collectionName: 'blog_categories';
   info: {
@@ -829,12 +829,13 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
     singularName: 'blog-post';
     pluralName: 'blog-posts';
     displayName: 'Blog Posts';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    header: Attribute.String & Attribute.Required;
     mainImage: Attribute.Media & Attribute.Required;
     youtubeUrl: Attribute.String & Attribute.Required;
     category: Attribute.Relation<
@@ -843,7 +844,9 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
       'api::blog-category.blog-category'
     >;
     seoBlock: Attribute.Component<'seo.seo-block'> & Attribute.Required;
-    amountViews: Attribute.Integer & Attribute.Required;
+    amountViews: Attribute.Integer &
+      Attribute.Required &
+      Attribute.DefaultTo<0>;
     contentBlocks: Attribute.Component<'blog.tutorial-content-blocks', true> &
       Attribute.Required;
     createdAt: Attribute.DateTime;
@@ -907,12 +910,13 @@ export interface ApiLegalPageLegalPage extends Schema.CollectionType {
     singularName: 'legal-page';
     pluralName: 'legal-pages';
     displayName: 'Legal Pages';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    header: Attribute.String & Attribute.Required;
     href: Attribute.String & Attribute.Required;
     seoBlock: Attribute.Component<'seo.seo-block'> & Attribute.Required;
     content: Attribute.RichText & Attribute.Required;
@@ -984,7 +988,7 @@ export interface ApiPagePage extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    header: Attribute.String & Attribute.Required;
     href: Attribute.String & Attribute.Required & Attribute.Unique;
     seoBlock: Attribute.Component<'seo.seo-block'> & Attribute.Required;
     createdAt: Attribute.DateTime;
@@ -1041,7 +1045,7 @@ export interface ApiToolsPageToolsPage extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    title: Attribute.String & Attribute.Required;
+    header: Attribute.String & Attribute.Required;
     contentfulContentType: Attribute.String & Attribute.Required;
     position: Attribute.Integer & Attribute.Required;
     seoBlock: Attribute.Component<'seo.seo-block'> & Attribute.Required;
@@ -1077,10 +1081,10 @@ declare module '@strapi/types' {
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
       'plugin::content-releases.release-action': PluginContentReleasesReleaseAction;
+      'plugin::i18n.locale': PluginI18NLocale;
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
-      'plugin::i18n.locale': PluginI18NLocale;
       'api::blog-category.blog-category': ApiBlogCategoryBlogCategory;
       'api::blog-post.blog-post': ApiBlogPostBlogPost;
       'api::blog-post-tab.blog-post-tab': ApiBlogPostTabBlogPostTab;

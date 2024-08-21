@@ -4,25 +4,26 @@
   "info": {
     "singularName": "blog-post",
     "pluralName": "blog-posts",
-    "displayName": "Blog Posts"
+    "displayName": "Blog Posts",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
   },
   "pluginOptions": {},
   "attributes": {
-    "title": {
+    "header": {
       "type": "string",
       "required": true,
       "unique": false
     },
     "mainImage": {
-      "allowedTypes": [
-        "images"
-      ],
       "type": "media",
       "multiple": false,
-      "required": true
+      "required": true,
+      "allowedTypes": [
+        "images"
+      ]
     },
     "youtubeUrl": {
       "type": "string",
@@ -41,7 +42,8 @@
     },
     "amountViews": {
       "type": "integer",
-      "required": true
+      "required": true,
+      "default": 0
     },
     "contentBlocks": {
       "type": "component",
