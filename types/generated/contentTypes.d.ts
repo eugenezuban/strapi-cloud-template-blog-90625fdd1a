@@ -849,6 +849,7 @@ export interface ApiBlogPostBlogPost extends Schema.CollectionType {
       Attribute.DefaultTo<0>;
     contentBlocks: Attribute.Component<'blog.tutorial-content-blocks', true> &
       Attribute.Required;
+    slug: Attribute.UID<'api::blog-post.blog-post', 'header'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

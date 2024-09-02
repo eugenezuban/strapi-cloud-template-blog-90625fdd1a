@@ -50,6 +50,11 @@
       "repeatable": true,
       "component": "blog.tutorial-content-blocks",
       "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "header",
+      "required": false
     }
   }
 }
