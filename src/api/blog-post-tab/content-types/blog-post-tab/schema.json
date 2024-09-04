@@ -4,7 +4,8 @@
   "info": {
     "singularName": "blog-post-tab",
     "pluralName": "blog-post-tabs",
-    "displayName": "Blog Post Tabs"
+    "displayName": "Blog Post Tabs",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -19,15 +20,16 @@
       "type": "integer",
       "required": true
     },
-    "href": {
-      "type": "string",
-      "required": true
-    },
     "blog_categories": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::blog-category.blog-category",
       "inversedBy": "blog_post_tabs"
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": false
     }
   }
 }

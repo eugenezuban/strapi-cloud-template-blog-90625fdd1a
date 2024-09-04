@@ -16,16 +16,16 @@
       "type": "string",
       "required": true
     },
-    "href": {
-      "type": "string",
-      "required": true,
-      "unique": true
-    },
     "seoBlock": {
       "type": "component",
       "repeatable": false,
       "component": "seo.seo-block",
       "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "header",
+      "required": false
     }
   }
 }

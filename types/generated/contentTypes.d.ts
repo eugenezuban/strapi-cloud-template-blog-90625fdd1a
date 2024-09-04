@@ -874,6 +874,7 @@ export interface ApiBlogPostTabBlogPostTab extends Schema.CollectionType {
     singularName: 'blog-post-tab';
     pluralName: 'blog-post-tabs';
     displayName: 'Blog Post Tabs';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -881,12 +882,12 @@ export interface ApiBlogPostTabBlogPostTab extends Schema.CollectionType {
   attributes: {
     name: Attribute.String & Attribute.Required;
     position: Attribute.Integer & Attribute.Required;
-    href: Attribute.String & Attribute.Required;
     blog_categories: Attribute.Relation<
       'api::blog-post-tab.blog-post-tab',
       'manyToMany',
       'api::blog-category.blog-category'
     >;
+    slug: Attribute.UID<'api::blog-post-tab.blog-post-tab', 'name'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -918,9 +919,9 @@ export interface ApiLegalPageLegalPage extends Schema.CollectionType {
   };
   attributes: {
     header: Attribute.String & Attribute.Required;
-    href: Attribute.String & Attribute.Required;
     seoBlock: Attribute.Component<'seo.seo-block'> & Attribute.Required;
     content: Attribute.RichText & Attribute.Required;
+    slug: Attribute.UID<'api::legal-page.legal-page', 'header'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -990,8 +991,8 @@ export interface ApiPagePage extends Schema.CollectionType {
   };
   attributes: {
     header: Attribute.String & Attribute.Required;
-    href: Attribute.String & Attribute.Required & Attribute.Unique;
     seoBlock: Attribute.Component<'seo.seo-block'> & Attribute.Required;
+    slug: Attribute.UID<'api::page.page', 'header'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

@@ -16,10 +16,6 @@
       "type": "string",
       "required": true
     },
-    "href": {
-      "type": "string",
-      "required": true
-    },
     "seoBlock": {
       "type": "component",
       "repeatable": false,
@@ -29,6 +25,11 @@
     "content": {
       "type": "richtext",
       "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "header",
+      "required": false
     }
   }
 }

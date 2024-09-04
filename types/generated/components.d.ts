@@ -23,7 +23,7 @@ export interface SeoSeoBlock extends Schema.Component {
   attributes: {
     metaTitle: Attribute.String & Attribute.Required;
     metaDescription: Attribute.Text & Attribute.Required;
-    metaImage: Attribute.Media;
+    metaImage: Attribute.Media & Attribute.Required;
   };
 }
 
